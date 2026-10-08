@@ -55,22 +55,22 @@
 - [ ] **Snapshot** the Wazuh VM after a successful install.
 
 ## 🪟 Phase 3: Windows VM Configuration & Log Collection
-- [ ] **Install Wazuh Agent:**
-  - [ ] Run the generated PowerShell command in an **elevated** PowerShell.
-  - [ ] Start the service: `NET START Wazuh` (or `Start-Service Wazuh`).
-  - [ ] Verify the agent shows **Active** in the Dashboard.
+- [/] **Install Wazuh Agent:**
+  - [/] Run the generated PowerShell command in an **elevated** PowerShell.
+  - [/] Start the service: `NET START Wazuh` (or `Start-Service Wazuh`).
+  - [/] Verify the agent shows **Active** in the Dashboard.
 - [ ] **Confirm Windows Event Logs:**
   - [ ] Open `C:\Program Files (x86)\ossec-agent\ossec.conf`.
   - [ ] Ensure `Security`, `System`, and `Application` `<localfile>` entries exist (they're on by default, so verify).
 - [ ] **Enable extra auditing (needed for good detections):**
   - [ ] Enable *Audit Process Creation* and *Include command line in process creation events* via Local Security Policy / `auditpol`.
   - [ ] Enable PowerShell Script Block Logging (Event ID 4104).
-- [ ] **Install Sysmon:**
-  - [ ] Download Sysmon from Microsoft Sysinternals.
-  - [ ] Download a community config (SwiftOnSecurity or Olaf Hartong's sysmon-modular).
-  - [ ] Install (elevated prompt): `sysmon64.exe -accepteula -i sysmonconfig.xml`
-  - [ ] Verify: Event Viewer → *Applications and Services Logs → Microsoft → Windows → Sysmon → Operational*.
-- [ ] **Integrate Sysmon with Wazuh:**
+- [/] **Install Sysmon:**
+  - [/] Download Sysmon from Microsoft Sysinternals.
+  - [/] Download a community config (SwiftOnSecurity or Olaf Hartong's sysmon-modular).
+  - [/] Install (elevated prompt): `sysmon64.exe -accepteula -i sysmonconfig.xml`
+  - [/] Verify: Event Viewer → *Applications and Services Logs → Microsoft → Windows → Sysmon → Operational*.
+- [/] **Integrate Sysmon with Wazuh:**
   - [ ] Add this to `ossec.conf` (`eventchannel` format):
     ```xml
     <localfile>
@@ -81,6 +81,41 @@
   - [ ] Restart the agent: `Restart-Service -Name wazuh`
   - [ ] Confirm Sysmon events (Event ID 1, 3, 11, etc.) appear in the Dashboard.
 - [ ] **Snapshot** the Windows VM ("clean + instrumented").
+- [ ] Add this to `ossec.conf` (`eventchannel` format):
+  ```xml
+  <localfile>
+    <location>Microsoft-Windows-Sysmon/Operational</location>
+    <log_format>eventchannel</log_format>
+  </localfile>
+- [ ] Restart the agent: `Restart-Service -Name wazuh`
+- [ ] **Back up the current `local_rules.xml`:**
+  ```bash
+  sudo cp /var/ossec/etc/rules/local_rules.xml \
+          /var/ossec/etc/rules/local_rules.xml.backup
+  ```
+- [ ] **Download the Sysmon `local_rules.xml`** ruleset.
+- [ ] **Replace the default `local_rules.xml`:**
+  ```bash
+  sudo cp /tmp/local_rules.xml /var/ossec/etc/rules/local_rules.xml
+  ```
+- [ ] **Set permissions:**
+  ```bash
+  sudo chown root:wazuh /var/ossec/etc/rules/local_rules.xml
+  sudo chmod 640 /var/ossec/etc/rules/local_rules.xml
+  ```
+- [ ] **Test the rules:** `sudo /var/ossec/bin/wazuh-logtest`
+- [ ] **Restart the Wazuh Manager:** `sudo systemctl restart wazuh-manager`
+- [ ] **Verify the Wazuh Manager is running:**
+  ```bash
+  sudo systemctl status wazuh-manager
+  ```
+- [ ] Confirm Sysmon events (Event ID 1, 3, 7, 8, 10, 11, etc.) appear in the Dashboard.
+- [ ] Verify the custom Sysmon rules trigger correctly using actual Sysmon events.
+- [ ] Check Wazuh Manager logs for rule/configuration errors:
+  ```bash
+  sudo tail -50 /var/ossec/logs/ossec.log
+  ```
+  - [ ] **Snapshot** the Windows VM ("clean + instrumented").
 
 ## 🔍 Phase 4: Practice & Detection Engineering
 ### 4A. Generate Baseline Telemetry
