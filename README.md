@@ -11,6 +11,14 @@ This is my collection of hands-on labs, write-ups, and projects from my ongoing 
 
 This repository documents my practical learning in cybersecurity through structured labs, test executions, and investigation write-ups. Each folder represents a different domain. The goal is to build and demonstrate real, reproducible skills rather than just theory.
 
+Before this repo, my earlier work was spread across a few standalone repositories:
+- [`enterprise-soc-homelab`](https://github.com/jayarzuniga/enterprise-soc-homelab)
+- [`junior-soc-analyst-guide`](https://github.com/jayarzuniga/junior-soc-analyst-guide)
+
+A scattered labs and one-off exercises where I was still building fundamentals.They're part of how I got here, but they weren't built with a consistent structure.
+ 
+**This repository is where that foundation gets made concrete.** Going forward, every lab, test execution, and investigation follows with an improving structure.
+
 > **Disclaimer:** All testing shown here was performed in isolated lab environments (personal VMs / sandboxes) that I own and control. Nothing in this repository was run against systems I don't have explicit authorization to test.
 
 ---
