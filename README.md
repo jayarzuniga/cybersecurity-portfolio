@@ -56,8 +56,7 @@ cybersecurity-portfolio/
 
 | Folder | Description | Status |
 |---|---|---|
-| [`red-teaming/`](./red-teaming) | Adversary emulation using Atomic Red Team — technique execution, MITRE ATT&CK mapping, and execution logs. | 🟡 In progress |
-| [`blue-teaming/`](./blue-teaming) | SOC-side detection and triage work in Wazuh — alert investigation, Sysmon correlation, rule tuning. | 🟡 In progress |
+| [`wazuh_soc_detection_lab/`](./wazuh_soc_detection_lab) | SOC-side detection and triage work in Wazuh — alert investigation, Sysmon correlation, rule tuning. | 🟡 In progress |
 | [`phishing-analysis/`](./phishing-analysis) | Email header analysis, IOC extraction, and phishing campaign breakdowns. | ⚪ Planned |
 | [`packet-analysis/`](./packet-analysis) | Wireshark/tcpdump captures and traffic analysis for common attack patterns. | ⚪ Planned |
 | [`malware-analysis/`](./malware-analysis) | Static/dynamic analysis of sample malware in an isolated sandbox. | ⚪ Planned |
