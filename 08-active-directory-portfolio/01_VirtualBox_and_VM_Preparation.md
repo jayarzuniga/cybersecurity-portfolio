@@ -206,9 +206,7 @@ Install Windows on both. When asked about the account choose **Domain join inste
 
 - Select each VM > **Snapshots** tab > **Take** and name it `01-Clean-Install`. Do this for DC01, FS01, CLIENT1 and CLIENT2.
 
-> **Portfolio screenshot:** VirtualBox Manager listing the Savora-Lab group, and the Network settings of one VM showing Internal Network LAB-LAN.
-
-![Figure 1 - Target lab topology](images/diagram2_lab.png)
+![Figure 1 - Target lab topology](screenshots/01_VM_Configurations.png)
 
 *Figure 1 - Target lab topology*
 
